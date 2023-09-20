@@ -8,14 +8,14 @@ spec:
   serviceAccountName: {{ .Values.component }}
   containers:
     - name: {{ .Values.component }}
-      image: 699776063346.dkr.ecr.us-east-1.amazonaws.com/{{ .Values.component }}:2.0.0
+      image: 699776063346.dkr.ecr.us-east-1.amazonaws.com/{{ .Values.component }}:{{ .Values.appversion }}
       volumeMounts:
         - mountPath: /params
           name: params
   initContainers:
     - name: aws-ssm-param-store
       image: 699776063346.dkr.ecr.us-east-1.amazonaws.com/aws-ssm-param-store:2.0.0
-      args: ["sample:prod.docdb.password"]
+      args: [ {{ .Values.params }} ]
       volumeMounts:
         - mountPath: /params
           name: params
