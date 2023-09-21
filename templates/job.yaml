@@ -5,7 +5,7 @@ kind: Job
 metadata:
   name: {{ .Values.component }}-schema-loader
   labels:
-    component: { { .Values.component } }
+    component: {{ .Values.component }}
 spec:
   template:
     spec:
@@ -13,7 +13,7 @@ spec:
       containers:
         - name: schema-loader
           image: 699776063346.dkr.ecr.us-east-1.amazonaws.com/schema-loader:2.0.1
-          args: ["{{ .Values.schemaLoadJob.type }}","{{ .Values.component }}"]
+          args: [ "{{ .Values.schemaLoadJob.type }}","{{ .Values.component }}" ]
           env:
             - name: env
               value: {{ .Values.env }}
